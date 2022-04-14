@@ -27,26 +27,15 @@ const getWord = async function(){
 getWord();
 
 const updatePlaceholder = function(word){
-
-    // looping through each letter to replace it by symbol,
-    // in future if letter entered match do not replace 
-    //with symbol
- 
+    // looping through each letter to replace it by symbol, in future if letter entered match do not replace with symbol
     const placeholderArray = [];
+    
     for (const letter of word) {
     //   console.log(letter);
       placeholderArray.push("●");
     }
 
-    // other solution:
-    // const wordArray = word.split("");
-    // wordArray.forEach( function(letter, index){
-    //     wordArray.splice(index, 1, "●" );
-    //     console.log(letter);
-    // });
-
     inProgress.innerText = placeholderArray.join("");
-
 }
 
 // updatePlaceholder(word);
@@ -55,17 +44,14 @@ button.addEventListener("click", function(e){
     e.preventDefault();
     const guess = letterInput.value;
     // console.log(guess);
-
     message.innerText ="";
     const goodGuess = validateInput(guess);
     if (goodGuess) {
         makeGuess(guess);
     }
-
     letterInput.value = "";
-
- 
 });
+
 
 const validateInput = function(input){
     const acceptedLetter = /[a-zA-Z]/;
@@ -80,6 +66,7 @@ const validateInput = function(input){
     }; 
 };
 
+
 const makeGuess = function(guess){
     guess = guess.toUpperCase();
     console.log(guess);
@@ -90,10 +77,10 @@ const makeGuess = function(guess){
         console.log(guessedLetters);
         showGuessedLetters(guess);
         countGuesses(guess);
-
     }
     updateWordInProgress(guessedLetters); 
 };
+
 
 const showGuessedLetters = function(){
     guessed.innerHTML = "";
@@ -103,6 +90,7 @@ const showGuessedLetters = function(){
         guessed.append(li);
     }
 };
+
 
 const updateWordInProgress = function(guessedLetters){
     const wordUpper = word.toUpperCase();
@@ -117,9 +105,7 @@ const updateWordInProgress = function(guessedLetters){
         }
     }
     inProgress.innerText = newArray.join("");
-
     hasWin();
-
 };
 
 const countGuesses = function(guess){
@@ -140,25 +126,25 @@ const countGuesses = function(guess){
     } else {
         remainNum.innerText = `${remainingGuesses} guesses`
     }
-    
 };
+
 
 const hasWin = function(){
     if (word.toUpperCase() === inProgress.innerText){
         message.classList.add("win");
         message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
         startOver();
-
     }
 };
+
 
 const startOver = function(){
     button.classList.add("hide");
     remainText.classList.add("hide");
     guessed.classList.add("hide");
     rePlay.classList.remove("hide");
-
 }
+
 
 rePlay.addEventListener("click", function(){
     message.classList.remove("win");
